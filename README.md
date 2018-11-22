@@ -9,7 +9,10 @@ In this repoository, we are putting the required assignments for the course.
 
 ## Created by 
 
-Team leader : Mahmoud Ahmed Selim
-Members     : Youmna Ebrahim Helmy 
-            : Mohamed Gamal El said
-            : Mohamed Osama Mostafa
+###Team leader : Mahmoud Ahmed Selim
+
+### Members: 
+1. Youmna Ebrahim Helmy 
+2. Mohamed Gamal El said
+3. Mohamed Osama Mostafa
+
