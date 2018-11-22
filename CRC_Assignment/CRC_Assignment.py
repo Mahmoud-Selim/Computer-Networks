@@ -1,5 +1,5 @@
 """
-  Function takes two strings of 0's and 1's 
+  Function takes two strings of 0's and 1's
   returns the result of XOR between them
   looping through 2 strings and XORing each element using list comprehension
   and then joining answer into a string
@@ -7,9 +7,9 @@
 def XOR (str1,str2):
     return "".join([ '0' if i == j else '1' for i,j in zip(str1,str2)])
 """
-  Function take message and generator 
-  calling CRC function 
-  then returns message + remainder 
+  Function take message and generator
+  calling CRC function
+  then returns message + remainder
 """
 def Transmit (message,generator):
     remainder = crc_div(message,generator)
@@ -49,3 +49,41 @@ def alter(message,index):           #it converts the bit in the required index
         message[index-1]='0'
     message=''.join(message)       #convert list to string
     return message
+
+print("Welcome to CRC Devisor...")
+print()
+print("Enter \"generator <file | verifier\" to get the result and the veification,")
+print("or enter \"generator <file | alter_arg(index) | verifier\" to alter the transmitted message at the given index and get the verfication and the division result...")
+print()
+user_input = input()
+input_tokens = user_input.split('|')
+file_name = input_tokens[0][input_tokens[0].find("<") + 1 : ] # get the file name
+
+file_hand = open(file_name.strip()) # remove any spaces
+message = ""
+generator = ""
+line = ""
+for line in file_hand:
+    line = line.strip()
+    if line == "":
+        continue;
+    elif message == "":
+        message = line
+    else:
+        generator = line
+        break
+
+transmitted_message = Transmit (message,generator)                      # The transmitted message
+if(user_input.find("alter_arg") > 0):                                    #if the user wants to alter the transmitted message
+    print("Warning... The transmitted message is altered")
+    index = input_tokens[1][input_tokens[1].find("(") + 1 : input_tokens[1].find(")")]
+    transmitted_message = alter(transmitted_message, int(index))
+
+if(verifier(transmitted_message,generator) == True):                    # CRC division at the receiver is 0
+    print("The transmitted message", transmitted_message)
+    print("The message was transmitted and recieved successfuly...")
+else:                                                                   # CRC division at the receiver is not 0
+    print("The transmitted message", transmitted_message)
+    print("There was an error within the recieved message...")
+
+input("Press any key to exit..")                                        # hold the output for the user to see.      
