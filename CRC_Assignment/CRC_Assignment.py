@@ -1,3 +1,23 @@
+"""
+  Function takes two strings of 0's and 1's 
+  returns the result of XOR between them
+  looping through 2 strings and XORing each element using list comprehension
+  and then joining answer into a string
+"""
+def XOR (str1,str2):
+    return "".join([ '0' if i == j else '1' for i,j in zip(str1,str2)])
+"""
+  Function take message and generator 
+  calling CRC function 
+  then returns message + remainder 
+"""
+def Transmit (message,generator):
+    remainder = crc_div(message,generator)
+    return message + remainder
+
+
+
+
 def crc_div(data,generator):
     m = len(generator)                                  #generator length
     frame = data + ("0"*(m-1))                          #frame with appended zeros
